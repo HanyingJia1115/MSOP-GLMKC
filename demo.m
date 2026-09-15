@@ -2,7 +2,7 @@ clear
 clc
 warning off
 
-dataName = 'UCI_DIGIT';
+dataName = 'AR10P';
 alphaset = 2.^(-1:1:7);
 betaset  = 2.^(-1:1:7);
 gammaset = 2.^(-1:1:7);
