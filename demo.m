@@ -26,8 +26,6 @@ for alpha = alphaset
     for beta = betaset
         for gamma = gammaset
             runIndex = runIndex+1;
-            s = RandStream('mt19937ar', 'Seed', 2);
-            RandStream.setGlobalStream(s);
 
             tic;
             [Yout, ~, ~] = MSOPGLMKC( ...
