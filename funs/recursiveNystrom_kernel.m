@@ -67,7 +67,6 @@ function [rInd, C] = recursiveNystrom_kernel(KH,s,accelerated_flag)
     
 %     [n,d] = size(X);
 n = size(KH,1);
-KH = real((KH + KH')/2);
 
     if(~accelerated_flag)
         % in the standard algorithm s samples are used in the final Nystrom
