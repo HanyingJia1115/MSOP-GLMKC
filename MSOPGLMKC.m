@@ -29,7 +29,6 @@ accelerated_flag = 0;
 
 rInd_temp = zeros(numker,num_anchors);
 Z = zeros(num,num_anchors,numker);
-apprxK_KKM = zeros(num,num,numker);
 
 for i = 1:numker
     [rInd_temp(i,:),C] = recursiveNystrom_kernel( ...
@@ -43,18 +42,13 @@ for i = 1:numker
     positive = d > tol;
     invSqrt(positive) = 1./sqrt(d(positive));
     Z(:,:,i) = bsxfun(@times,C*U,invSqrt');
-    apprxK_KKM(:,:,i) = Z(:,:,i)*Z(:,:,i)';
 end
 
-KH = apprxK_KKM;
-
-K0 = zeros(num,num);
-for p = 1:numker
-    KH(:,:,p) = (KH(:,:,p)+KH(:,:,p)')/2;
-    [Hp,~] = eigs(KH(:,:,p),k,'la',opt);
-    K0 = K0+(1/numker)*KH(:,:,p);
-    HP(:,:,p) = Hp;
+for p=1:numker 
+      [Hp, ~, ~] = svds(Z(:,:,p), k);
+      HP(:,:,p) = Hp;
 end
+
 
 beta_hi = beta;
 YA = cell(1,numker);
